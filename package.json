@@ -1,0 +1,9 @@
+{
+  "name": "mydreambucket",
+  "private": true,
+  "type": "module",
+  "description": "My Dream Bucket - a bucket list, the places you have been and the memories, private on your phone.",
+  "scripts": {
+    "test": "node --test tests/unit/"
+  }
+}

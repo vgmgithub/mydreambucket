@@ -1,0 +1,22 @@
+/* My Dream Bucket - the app shell (header, page width, menu). The Bucket List screens' own styles are in styles.css. */
+body { margin: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+.mdb-header { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 10px; padding: calc(10px + var(--safe-top, 0px)) 14px 10px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.mdb-logo { width: 34px; height: 34px; border-radius: 10px; flex: 0 0 auto; }
+.mdb-title { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.mdb-title b { font-size: 1.08rem; font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mdb-title small { font-size: 0.72rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mdb-icon { flex: 0 0 auto; width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); color: inherit; font-size: 1.05rem; cursor: pointer; display: grid; place-items: center; }
+.mdb-back { font-size: 1.6rem; line-height: 1; }
+.mdb-main { max-width: 760px; margin: 0 auto; padding: 12px 14px calc(96px + var(--safe-bottom, 0px)); }
+.mdb-main .home-view { padding: 0; }
+#bucketBottomNav.hidden { display: none; }
+.mdb-menu-row { display: flex; align-items: center; gap: 12px; width: 100%; border: 1px solid var(--line); background: var(--card); color: inherit; border-radius: 14px; padding: 12px; margin-bottom: 8px; text-align: left; cursor: pointer; }
+.mdb-menu-row b { display: block; font-size: 0.92rem; }
+.mdb-menu-row small { color: var(--muted); font-size: 0.74rem; }
+.mdb-menu-i { font-size: 1.4rem; width: 32px; text-align: center; }
+.mdb-menu-sub { margin: 14px 0 6px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.mdb-cur { display: flex; flex-wrap: wrap; gap: 6px; }
+.mdb-cur button { border: 1px solid var(--line); background: var(--card); color: inherit; border-radius: 999px; padding: 6px 12px; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
+.mdb-cur button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.mdb-ver { opacity: .7; }

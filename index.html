@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#7c3aed" />
+  <title>My Dream Bucket</title>
+  <meta name="description" content="Your bucket list, the places you have been and the memories - private, on your phone." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body data-mode="bucket">
+  <header id="appHeader" class="mdb-header"></header>
+  <main class="mdb-main">
+    <section id="bucketView" class="home-view"></section>
+    <section id="bucketPlanView" class="home-view hidden"></section>
+  </main>
+  <nav class="bottom-nav" id="bucketBottomNav"></nav>
+  <div id="modalHost" class="modal-host hidden" aria-hidden="true"></div>
+  <noscript>My Dream Bucket needs JavaScript.</noscript>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
