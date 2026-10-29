@@ -33,6 +33,18 @@ It is plain HTML, CSS and JavaScript modules - no build step. Serve the folder o
 npm test
 ```
 
+## Website and app
+
+A normal browser tab shows the **website** (`index.html`, `site/`): what the app does, and an **Install** button (the
+browser's own install prompt, or the steps for that browser). The app (`app.html`) runs as the **installed** app;
+`js/mode.js` moves each visitor to the right one (on localhost the app also opens in a tab). The look follows the app
+icon (`icons/brand/icon-source.webp`).
+
+- `python tools/make-icons.py` - every icon, the maskable and Apple icons, the favicon and `icons/og-image.png`
+- `python tools/screenshots.py` - the website's pictures of the app (`site/shot-*.webp`), from the real app filled with
+  `tools/demo-list.json` (needs Chrome and Python's `websockets`)
+- Deploy as static files (Vercel: `vercel.json`, no build step). Fonts: Baloo 2 and Nunito from Google Fonts.
+
 ## How it is put together
 
 | Path | What it is |

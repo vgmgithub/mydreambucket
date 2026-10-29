@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- The app runs only as the INSTALLED app; in a plain browser tab the website (index.html) is shown instead,
+       before anything else loads. See js/mode.js (localhost is exempt). -->
+  <script src="js/mode.js"></script>
+  <script>MDB.guard('app');</script>
+  <meta name="theme-color" content="#f6f3ff" />
+  <meta name="robots" content="noindex" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Dream Bucket" />
+  <title>My Dream Bucket</title>
+  <meta name="description" content="Your bucket list, the places you have been and the memories - private, on your phone." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="app.css" />
+  <!-- Light or dusk before the first paint, as the phone is set (js/main.js keeps it in step). -->
+  <script>document.documentElement.dataset.theme = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';</script>
+</head>
+<body data-mode="bucket" class="mdb-enter">
+  <header id="appHeader" class="mdb-header"></header>
+  <main class="mdb-main">
+    <section id="bucketView" class="home-view"></section>
+    <section id="bucketPlanView" class="home-view hidden"></section>
+  </main>
+  <nav class="bottom-nav" id="bucketBottomNav"></nav>
+  <div id="modalHost" class="modal-host hidden" aria-hidden="true"></div>
+  <noscript>My Dream Bucket needs JavaScript.</noscript>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

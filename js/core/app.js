@@ -63,9 +63,15 @@ export const field = (labelText, inputNode) => el('div', { class: 'field' }, [el
 
 // ---- The pop-up sheet: one at a time; the phone's Back closes it ----
 let _modalEntry = false, _popsToIgnore = 0, escHandler = null;
+// Closing slides the sheet down first (a short animation), so "open" is also "not on its way out".
+let _closing = null;
+const _isOpen = () => { const h = $('#modalHost'); return !h.classList.contains('hidden') && !h.classList.contains('is-closing'); };
+const _calm = () => !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
 export function openModal(node) {
   if (!_modalEntry) { try { history.pushState({ modal: true }, '', location.pathname + location.search); _modalEntry = true; } catch (_) {} }
   const host = $('#modalHost');
+  if (_closing) { clearTimeout(_closing); _closing = null; }
+  host.classList.remove('is-closing');
   host.innerHTML = '';
   host.appendChild(node);
   host.classList.remove('hidden');
@@ -78,17 +84,20 @@ export function openModal(node) {
 }
 function _hideModal() {
   const host = $('#modalHost');
-  host.classList.add('hidden');
-  host.setAttribute('aria-hidden', 'true');
-  host.innerHTML = '';
   document.documentElement.classList.remove('locked');
   document.body.classList.remove('locked');
   if (escHandler) { document.removeEventListener('keydown', escHandler); escHandler = null; }
+  host.onclick = null;
+  const done = () => { _closing = null; host.classList.add('hidden'); host.classList.remove('is-closing'); host.setAttribute('aria-hidden', 'true'); host.innerHTML = ''; };
+  if (host.classList.contains('hidden') || _calm()) { done(); return; }
+  if (_closing) return;
+  host.classList.add('is-closing');
+  _closing = setTimeout(done, 230);
 }
 export function closeModal() {
   _hideModal();
   setTimeout(() => {
-    if (!_modalEntry || !$('#modalHost').classList.contains('hidden')) return;
+    if (!_modalEntry || _isOpen()) return;
     _modalEntry = false; _popsToIgnore++;
     try { history.back(); } catch (_) { _popsToIgnore--; }
   }, 0);
@@ -97,7 +106,16 @@ export function closeModal() {
 // ---- The list ('bucket') and the plan ('bucketplan'): one screen at a time ----
 const _modes = {};
 export function onMode(mode, draw) { _modes[mode] = draw; }
+// Moving between the list and the plan slides one screen out and the next in, where the browser can (View Transitions).
 export function setAppMode(mode) {
+  const change = state.appMode !== mode;
+  if (change && document.startViewTransition && !_calm() && !document.hidden) {
+    document.documentElement.classList.toggle('vt-back', mode === 'bucket');
+    return document.startViewTransition(() => _setMode(mode)).updateCallbackDone;
+  }
+  return _setMode(mode);
+}
+function _setMode(mode) {
   const back = state.appMode !== mode && mode !== 'bucket';
   state.appMode = mode;
   document.body.dataset.mode = mode;
@@ -106,7 +124,7 @@ export function setAppMode(mode) {
   $('#bucketBottomNav').classList.toggle('hidden', mode !== 'bucket');
   if (back) { try { history.pushState({ mode }, '', location.pathname + location.search); } catch (_) {} }
   window.scrollTo(0, 0);
-  if (_modes[mode]) _modes[mode]();
+  if (_modes[mode]) return _modes[mode]();
 }
 window.addEventListener('popstate', () => {
   if (_popsToIgnore) { _popsToIgnore--; return; }

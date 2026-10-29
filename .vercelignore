@@ -1,0 +1,7 @@
+tools/
+tests/
+icons/brand/
+.claude/
+node_modules/
+package.json
+README.md

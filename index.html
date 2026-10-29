@@ -3,24 +3,434 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#7c3aed" />
-  <title>My Dream Bucket</title>
-  <meta name="description" content="Your bucket list, the places you have been and the memories - private, on your phone." />
+  <!-- The website. In the INSTALLED app this page moves straight to app.html (js/mode.js). -->
+  <script src="js/mode.js"></script>
+  <script>MDB.guard('site'); document.documentElement.classList.add('js');</script>
+  <title>My Dream Bucket — your bucket list, travel map and memories</title>
+  <meta name="description" content="My Dream Bucket keeps your bucket list, every place you have been and the memories you made - on a real map, on a timeline, with a savings plan, and private on your phone. Free, no account, works offline." />
+  <meta name="theme-color" content="#8ec5ff" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="My Dream Bucket — Dream it. Plan it. Live it." />
+  <meta property="og:description" content="Your bucket list, the places you have been and the memories - on a map, on a timeline, private on your phone." />
+  <meta property="og:image" content="icons/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="app.css" />
+  <link rel="icon" href="icons/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" />
+  <link rel="preload" as="image" href="site/shot-list.webp" />
+  <link rel="stylesheet" href="site/site.css" />
 </head>
-<body data-mode="bucket">
-  <header id="appHeader" class="mdb-header"></header>
-  <main class="mdb-main">
-    <section id="bucketView" class="home-view"></section>
-    <section id="bucketPlanView" class="home-view hidden"></section>
+<body>
+  <a class="skip" href="#features">Skip to the features</a>
+
+  <!-- ===== Header ===== -->
+  <header class="nav" id="nav">
+    <a class="brand" href="#top" aria-label="My Dream Bucket - back to the top">
+      <img src="icons/icon-192.png" alt="" width="40" height="40" />
+      <span class="brand-name">My Dream <b>Bucket</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#features">Features</a>
+      <a href="#places">Places</a>
+      <a href="#milestones">Milestones</a>
+      <a href="#plan">Plan</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="btn btn-primary btn-sm nav-cta" type="button" data-install><span data-install-label>Install app</span></button>
+  </header>
+
+  <main>
+    <!-- ===== 1 · Hero: the icon's own scene ===== -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="scene" aria-hidden="true">
+        <!-- The sky: clouds and a plane on its dotted path (anchored to the top) -->
+        <svg class="scene-sky" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMin slice">
+          <g class="layer clouds" data-depth="0.12">
+            <g class="cloud c1"><ellipse cx="240" cy="150" rx="90" ry="26" fill="#fff" opacity=".7"/><ellipse cx="290" cy="132" rx="60" ry="30" fill="#fff" opacity=".7"/></g>
+            <g class="cloud c2"><ellipse cx="1010" cy="120" rx="110" ry="24" fill="#fff" opacity=".55"/><ellipse cx="1070" cy="104" rx="60" ry="26" fill="#fff" opacity=".55"/></g>
+            <g class="cloud c3"><ellipse cx="660" cy="250" rx="70" ry="16" fill="#fff" opacity=".45"/></g>
+          </g>
+          <g class="flight layer" data-depth="0.05">
+            <path id="flightPath" d="M-80 330 C 220 150, 520 250, 760 140 S 1180 30, 1520 70" fill="none"/>
+            <path class="trail" d="M-80 330 C 220 150, 520 250, 760 140 S 1180 30, 1520 70" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 14" opacity=".75"/>
+            <g class="plane">
+              <g transform="rotate(90) translate(-16 -16) scale(1.35)"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" fill="#fff"/></g>
+              <animateMotion dur="16s" repeatCount="indefinite" rotate="auto"><mpath href="#flightPath"/></animateMotion>
+            </g>
+          </g>
+        </svg>
+        <!-- The land: the sun going down behind the hills, the lake, the green hills (anchored to the bottom) -->
+        <svg class="scene-land" viewBox="0 0 1440 292" preserveAspectRatio="xMidYMax slice">
+          <defs>
+            <radialGradient id="sunG" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff7d6"/><stop offset=".45" stop-color="#fde68a"/><stop offset="1" stop-color="#fdba74" stop-opacity="0"/></radialGradient>
+            <linearGradient id="farG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c4a3ec"/><stop offset="1" stop-color="#a98be0"/></linearGradient>
+            <linearGradient id="nearG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a7bd8"/><stop offset="1" stop-color="#7c62c4"/></linearGradient>
+            <linearGradient id="lakeG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a7c4ff"/><stop offset="1" stop-color="#6f8fe6"/></linearGradient>
+            <linearGradient id="hillG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c7a5c"/><stop offset="1" stop-color="#123d36"/></linearGradient>
+            <linearGradient id="hill2G" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a8a66"/><stop offset="1" stop-color="#1b5246"/></linearGradient>
+          </defs>
+          <g class="layer" data-depth="0.22">
+            <circle cx="1130" cy="96" r="130" fill="url(#sunG)" class="sun-glow"/>
+            <circle cx="1130" cy="96" r="48" fill="#fff1c1" opacity=".95"/>
+          </g>
+          <!-- drawn on a 470-900 grid, pressed to two thirds of its height -->
+          <g transform="translate(0 -319.6) scale(1 .68)">
+          <g class="layer" data-depth="0.1">
+            <path d="M0 640 L120 560 L210 610 L330 500 L450 600 L560 540 L650 590 L760 520 L880 600 L990 545 L1110 610 L1230 530 L1340 590 L1440 550 V720 H0Z" fill="url(#farG)" opacity=".85"/>
+          </g>
+          <g class="layer" data-depth="0.05">
+            <path d="M0 690 L150 600 L260 660 L380 590 L520 680 L640 640 L720 680 L860 610 L980 690 L1100 640 L1220 690 L1330 630 L1440 670 V740 H0Z" fill="url(#nearG)" opacity=".9"/>
+          </g>
+          <rect x="0" y="705" width="1440" height="110" fill="url(#lakeG)"/>
+          <g class="shimmer" fill="#fff6d5">
+            <rect x="1040" y="722" width="180" height="4" rx="2" opacity=".85"/><rect x="1065" y="738" width="130" height="4" rx="2" opacity=".7"/>
+            <rect x="1010" y="754" width="220" height="3" rx="2" opacity=".55"/><rect x="1080" y="770" width="100" height="3" rx="2" opacity=".5"/>
+            <rect x="300" y="740" width="90" height="3" rx="2" opacity=".35"/><rect x="560" y="760" width="120" height="3" rx="2" opacity=".3"/>
+          </g>
+          <path d="M0 800 Q180 740 360 780 T720 790 T1080 770 T1440 790 V900 H0Z" fill="url(#hill2G)"/>
+          <path d="M0 840 Q240 790 520 830 T1000 835 T1440 820 V900 H0Z" fill="url(#hillG)"/>
+          <path d="M40 900 C30 820 70 770 120 740 C110 800 100 850 112 900Z M90 900 C110 830 160 790 210 780 C180 830 160 860 158 900Z" fill="#1f6b4f"/>
+          <path d="M1440 900 C1450 830 1400 780 1350 760 C1365 820 1370 860 1360 900Z M1390 900 C1370 840 1320 800 1270 795 C1300 840 1315 870 1318 900Z" fill="#1f6b4f"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="hero-in">
+        <div class="hero-copy">
+          <p class="eyebrow" data-reveal><span>✈️</span> For dreamers who love to travel</p>
+          <h1 id="hero-title" data-reveal style="--d:.08s">Dream it. Plan it. <span class="ink">Live&nbsp;it.</span></h1>
+          <p class="lead" data-reveal style="--d:.16s">My Dream Bucket keeps your bucket list, every place you have been and the memories you made — on a real map, on a timeline, with a plan to pay for the next one. All private, on your phone.</p>
+          <div class="hero-cta" data-reveal style="--d:.24s">
+            <button class="btn btn-primary btn-lg" type="button" data-install>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span data-install-label>Install the app — free</span>
+            </button>
+            <a class="btn btn-ghost btn-lg" href="#features">See what’s inside</a>
+          </div>
+          <p class="install-note" data-install-note aria-live="polite"></p>
+          <ul class="chips" data-reveal style="--d:.32s">
+            <li>🆓 Free</li><li>🙅 No account</li><li>📴 Works offline</li><li>🔒 Stays on your phone</li>
+          </ul>
+        </div>
+
+        <div class="hero-visual" data-reveal style="--d:.2s">
+          <div class="phone phone-back" data-tilt>
+            <img src="site/shot-places.webp" alt="The Places tab: 16 places visited, the journey year by year" width="390" height="844" />
+          </div>
+          <div class="phone phone-front" data-tilt>
+            <img src="site/shot-list.webp" alt="My list: 8 of 16 dreams ticked off, with the Northern Lights and Everest Base Camp still to go" width="390" height="844" />
+          </div>
+          <div class="float-card fc-1">
+            <span class="fc-ico">📍</span>
+            <div><b>See the Northern Lights</b><small>Tromsø, Norway · by 2027</small><i class="mini-bar"><i style="width:25%"></i></i></div>
+          </div>
+          <div class="float-card fc-2">
+            <span class="fc-ico fc-done">✓</span>
+            <div><b>Go scuba diving</b><small>Came true · Feb 2025</small></div>
+          </div>
+          <div class="float-card fc-3"><span class="fc-big">16</span><small>places<br/>visited</small></div>
+          <p class="shot-caption">The real app, shown with an example list.</p>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#features" aria-label="Scroll to the features"><span></span></a>
+    </section>
+
+    <!-- ===== Ideas ticker ===== -->
+    <div class="ticker" aria-label="Ideas to start a list with">
+      <div class="ticker-track">
+        <span>🌌 See the Northern Lights</span><span>🤿 Go scuba diving</span><span>🏔️ Trek to a Himalayan base camp</span><span>🚂 Take a long train journey</span>
+        <span>🪔 Visit Kashi and the Ganga aarti</span><span>👨‍👩‍👧 Take the parents on a trip</span><span>🏃 Run a 10K</span><span>🎈 A hot-air balloon at sunrise</span>
+        <span>🌸 Cherry blossoms in Kyoto</span><span>🦁 A safari in the Masai Mara</span><span>🌅 Sunset in Santorini</span><span>🏊 Learn to swim</span>
+      </div>
+    </div>
+
+    <!-- ===== 2 · Features at a glance ===== -->
+    <section class="sec" id="features" aria-labelledby="features-title">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <p class="kicker">Everything in one bucket</p>
+          <h2 id="features-title">Every dream, every trip, every memory — <span class="ink">together at last</span></h2>
+          <p class="sub">Four screens that cover the whole journey: what you want to do, what you have done, where you have been, and how to pay for what is next.</p>
+        </header>
+        <div class="pillars">
+          <a class="pillar" href="#list" data-reveal style="--d:0s">
+            <span class="p-ico" style="--g:linear-gradient(135deg,#7ee8d3,#8ec5ff)">📝</span>
+            <h3>My list</h3>
+            <p>Dreams with a kind, a year to aim for, a cost and the stages to get there. Must-dos come first.</p>
+            <span class="more">Your list →</span>
+          </a>
+          <a class="pillar" href="#milestones" data-reveal style="--d:.08s">
+            <span class="p-ico" style="--g:linear-gradient(135deg,#fdba74,#f472b6)">🏆</span>
+            <h3>Milestones</h3>
+            <p>Everything that came true, and every stage done, year by year — the story of your list.</p>
+            <span class="more">Milestones →</span>
+          </a>
+          <a class="pillar" href="#places" data-reveal style="--d:.16s">
+            <span class="p-ico" style="--g:linear-gradient(135deg,#34d399,#0f9f8a)">🗺️</span>
+            <h3>Places</h3>
+            <p>Each country and Indian state you have been to, on a real map — with routes, photos and memories.</p>
+            <span class="more">Places →</span>
+          </a>
+          <a class="pillar" href="#plan" data-reveal style="--d:.24s">
+            <span class="p-ico" style="--g:linear-gradient(135deg,#b794f6,#7c3aed)">🎯</span>
+            <h3>Bucket List Plan</h3>
+            <p>What to put aside each month for every dream, and when each one fits — so the dates are real.</p>
+            <span class="more">The plan →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3 · My list ===== -->
+    <section class="sec sec-tint" id="list" aria-labelledby="list-title">
+      <div class="wrap split">
+        <div class="split-visual" data-reveal>
+          <div class="phone phone-solo" data-tilt><img src="site/shot-list.webp" alt="My list with must-dos, places, costs and stage progress" width="390" height="844" loading="lazy" /></div>
+          <div class="try" aria-label="Try ticking off a dream">
+            <p class="try-k">Try it — tick off a dream</p>
+            <div class="try-card" id="try-card">
+              <button class="try-tick" type="button" id="try-tick" aria-pressed="false" aria-label="Tick off: See the Northern Lights"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <div class="try-b">
+                <b class="try-t">See the Northern Lights</b>
+                <span class="try-chips"><i>✈️ Travel</i><i class="pin">📍 Tromsø, Norway</i><i>🎯 by 2027</i></span>
+                <span class="try-mem" aria-live="polite"></span>
+              </div>
+            </div>
+            <button class="try-reset" type="button" id="try-reset" hidden>Put it back on the list</button>
+          </div>
+        </div>
+        <div class="split-copy">
+          <p class="kicker" data-reveal>📝 My list</p>
+          <h2 id="list-title" data-reveal>A bucket list that keeps you <span class="ink">moving</span></h2>
+          <p class="sub" data-reveal>Write the dream down, give it a year, and watch it come closer. When it comes true, tick it off with the month, the place and a line about how it went.</p>
+          <ul class="ticks">
+            <li data-reveal><span>🧭</span><div><b>17 kinds of dream</b> Travel, adventure, food, learning, family, giving back and more — filter by any of them.</div></li>
+            <li data-reveal><span>⭐</span><div><b>Must-dos first</b> Then the soonest year — or arrange the list by hand, the way you like it.</div></li>
+            <li data-reveal><span>🪜</span><div><b>Stages for big dreams</b> Visa, flights, the training trek — each ticked on its own, with a progress bar.</div></li>
+            <li data-reveal><span>👨‍👩‍👧</span><div><b>One list per person</b> You, your partner, the kids, your parents — everyone dreams their own.</div></li>
+            <li data-reveal><span>💡</span><div><b>Ideas to start from</b> Short list? Add the Northern Lights or a long train journey in one tap.</div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 4 · Places ===== -->
+    <section class="sec sec-sky" id="places" aria-labelledby="places-title">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <p class="kicker">🗺️ Places</p>
+          <h2 id="places-title">Every place you have been. <span class="ink">On a real map.</span></h2>
+          <p class="sub">The countries and Indian states you have visited fill in as you go — darker means more places. Tap one to see its trips, photos and memories.</p>
+        </header>
+        <figure class="browser" data-reveal id="map-frame">
+          <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>My Dream Bucket · Places map</span></div>
+          <img src="site/shot-map.webp" alt="The full-screen Places map: countries visited marked, a travel story with countries, states, places and trips, and recent trips" width="1600" height="950" loading="lazy" />
+          <figcaption>The real Places map, shown with an example list.</figcaption>
+        </figure>
+        <div class="counters" data-reveal>
+          <div><b data-count="4">4</b><span>map styles<br/><small>Standard · Satellite · Terrain · Chart</small></span></div>
+          <div><b data-count="7">7</b><span>ways to travel<br/><small>flight, train, car, bike, ship…</small></span></div>
+          <div><b data-count="12">12</b><span>landscapes<br/><small>beach, snow, desert, waterfall…</small></span></div>
+          <div><b data-count="24">24</b><span>adventure badges<br/><small>scuba, paragliding, rafting…</small></span></div>
+        </div>
+        <div class="feature-grid">
+          <article class="feat" data-reveal style="--d:0s"><span>🛫</span><h3>Routes on the map</h3><p>Where each trip started and how you travelled — the line is drawn from home to there.</p></article>
+          <article class="feat" data-reveal style="--d:.06s"><span>📸</span><h3>Photos &amp; memories</h3><p>A photo, a star rating and the best memory for every trip — the latest photo shows on the map.</p></article>
+          <article class="feat" data-reveal style="--d:.12s"><span>📅</span><h3>The journey, year by year</h3><p>Every trip on a timeline, with the nights away, where you stayed and who came along.</p></article>
+          <article class="feat" data-reveal style="--d:.18s"><span>🥇</span><h3>Rank your places</h3><p>Drag your favourites to the top. Your all-time best place, decided by you.</p></article>
+          <article class="feat" data-reveal style="--d:.24s"><span>🎯</span><h3>Travel goals</h3><p>Set how many countries you are aiming for and watch the count climb.</p></article>
+          <article class="feat" data-reveal style="--d:.3s"><span>📌</span><h3>Places to visit</h3><p>Dreams with a place and the spots you add yourself, outlined on the map — the soonest first.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5 · Milestones ===== -->
+    <section class="sec sec-sunset" id="milestones" aria-labelledby="ms-title">
+      <div class="wrap split split-rev">
+        <div class="split-copy">
+          <p class="kicker" data-reveal>🏆 Milestones</p>
+          <h2 id="ms-title" data-reveal>Look back at how far <span class="ink-light">you have come</span></h2>
+          <p class="sub" data-reveal>Every dream that came true and every stage done, on one timeline — from your very first wish to the next one coming up. It even works out how long a dream takes you to come true.</p>
+          <ol class="timeline" id="timeline" aria-label="An example timeline">
+            <li class="tl-year">2023</li>
+            <li data-reveal><span>🏍️</span><div><b>Ride to Pangong Lake</b><small>Jul · “Seven shades of blue at 14,000 feet.”</small></div></li>
+            <li data-reveal><span>🐪</span><div><b>Sleep under the stars in the desert</b><small>Dec · Jaisalmer</small></div></li>
+            <li class="tl-year">2024</li>
+            <li data-reveal><span>🏃</span><div><b>Run a 10K</b><small>Mar · 58 minutes</small></div></li>
+            <li data-reveal><span>🌄</span><div><b>Sunrise at Tiger Hill</b><small>Nov · Darjeeling</small></div></li>
+            <li class="tl-year">2025</li>
+            <li data-reveal><span>🤿</span><div><b>Go scuba diving</b><small>Feb · Havelock, Andaman</small></div></li>
+            <li data-reveal><span>🏔️</span><div><b>See the Swiss Alps by train</b><small>Jun · Interlaken</small></div></li>
+            <li class="tl-year">2026</li>
+            <li data-reveal><span>🌋</span><div><b>Sunrise trek up Mount Batur</b><small>May · Bali</small></div></li>
+            <li class="tl-next" data-reveal><span>🌌</span><div><b>Next up: the Northern Lights</b><small>by 2027 · 1 of 4 stages done</small></div></li>
+          </ol>
+          <p class="fine">An example timeline.</p>
+        </div>
+        <div class="split-visual" data-reveal>
+          <div class="phone phone-solo" data-tilt><img src="site/shot-milestones.webp" alt="Milestones: 8 dreams came true, dreaming since 2017, with what is coming up" width="390" height="844" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6 · Insights ===== -->
+    <section class="sec sec-tint" id="insights" aria-labelledby="in-title">
+      <div class="wrap split">
+        <div class="split-visual" data-reveal>
+          <div class="phone phone-solo" data-tilt><img src="site/shot-insights.webp" alt="Insights: dreams come true this year, the best year, how long a dream takes, and tips for you" width="390" height="844" loading="lazy" /></div>
+        </div>
+        <div class="split-copy">
+          <p class="kicker" data-reveal>💡 Insights</p>
+          <h2 id="in-title" data-reveal>Your travel story, <span class="ink">in numbers</span></h2>
+          <p class="sub" data-reveal>What your list and your trips say about you — and a nudge towards the next one.</p>
+          <div class="tiles">
+            <div class="tile" data-reveal style="--d:0s"><span>🔥</span><b>Your best year</b><small>The year the most dreams came true</small></div>
+            <div class="tile" data-reveal style="--d:.05s"><span>⏳</span><b>How long a dream takes</b><small>From the first wish to the tick</small></div>
+            <div class="tile" data-reveal style="--d:.1s"><span>🧗</span><b>Your strength</b><small>The kind of dream you finish most</small></div>
+            <div class="tile" data-reveal style="--d:.15s"><span>🏁</span><b>Almost there</b><small>The dream with the most stages done</small></div>
+            <div class="tile" data-reveal style="--d:.2s"><span>🧳</span><b>Days away</b><small>Trips a year, the longest trip, the busiest year</small></div>
+            <div class="tile" data-reveal style="--d:.25s"><span>🏖️</span><b>What you love</b><small>Landscapes, stays, adventures and who comes along</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7 · The plan ===== -->
+    <section class="sec sec-dusk" id="plan" aria-labelledby="plan-title">
+      <div class="wrap split split-rev">
+        <div class="split-copy">
+          <p class="kicker" data-reveal>🎯 Bucket List Plan</p>
+          <h2 id="plan-title" data-reveal>Turn “someday” into <span class="ink-light">a&nbsp;date</span></h2>
+          <p class="sub" data-reveal>Every dream with a cost and a year becomes a savings goal. Tell the app what you can put aside a month, and it shows which dreams fit on time — and which move a little later.</p>
+          <ol class="steps">
+            <li data-reveal><b>1</b><div><strong>What it will cost by then</strong>Today’s price grows with prices (about 6% a year — you can change it).</div></li>
+            <li data-reveal><b>2</b><div><strong>Where the money waits</strong>The nearer the date, the safer the place:</div></li>
+          </ol>
+          <div class="ladder" data-reveal>
+            <div style="--w:38%"><span>Under 1 year</span><b>Savings account, RD or a liquid fund</b><i>~6.5%</i></div>
+            <div style="--w:52%"><span>1–3 years</span><b>FD, RD or a short-term debt fund</b><i>~7%</i></div>
+            <div style="--w:70%"><span>3–5 years</span><b>A conservative or balanced hybrid fund</b><i>~8.5%</i></div>
+            <div style="--w:92%"><span>5+ years</span><b>An equity index fund, by monthly SIP</b><i>~10%</i></div>
+          </div>
+          <ol class="steps" start="3">
+            <li data-reveal><b>3</b><div><strong>What you have put aside counts</strong>It grows too, and comes off what is still needed.</div></li>
+            <li data-reveal><b>4</b><div><strong>One amount a month</strong>Must-dos first, then the soonest — money frees up as each dream is reached.</div></li>
+          </ol>
+          <p class="fine">Careful assumptions, not promises — kinds of places to keep money, never named products. Amounts in ₹, $, AED, S$, NZ$ or Sri Lankan Rs.</p>
+        </div>
+        <div class="split-visual" data-reveal>
+          <div class="phone phone-solo" data-tilt><img src="site/shot-plan.webp" alt="The Bucket List Plan: the monthly amount to fund every dream on time, year by year" width="390" height="844" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8 · Privacy ===== -->
+    <section class="sec" id="privacy" aria-labelledby="privacy-title">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <p class="kicker">🔒 Private by design</p>
+          <h2 id="privacy-title">Your dreams are <span class="ink">yours alone</span></h2>
+          <p class="sub">No account to make, no server keeping your list, nothing sent to us. My Dream Bucket lives on your phone.</p>
+        </header>
+        <div class="privacy-grid">
+          <article class="pcard" data-reveal style="--d:0s"><span>📱</span><h3>On your phone only</h3><p>Your list, places, memories and photos are kept on the phone — nowhere else.</p></article>
+          <article class="pcard" data-reveal style="--d:.06s"><span>💾</span><h3>Backups you keep</h3><p>Back up to a file (photos included) and restore it on a new phone in a moment.</p></article>
+          <article class="pcard" data-reveal style="--d:.12s"><span>📴</span><h3>Works offline</h3><p>Once installed it opens anywhere — on a mountain, at sea, in a tunnel.</p></article>
+          <article class="pcard" data-reveal style="--d:.18s"><span>🗺️</span><h3>The map, only the map</h3><p>Opening the map loads the map itself. Your places, names and photos are never sent.</p></article>
+        </div>
+        <div class="mynotes" data-reveal>
+          <span class="mn-ico">📥</span>
+          <div><b>Already keep your bucket list in MyNotes?</b> Bring it across in one tap — dreams, places, photos and plan. MyNotes stays exactly as it is.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 9 · Install ===== -->
+    <section class="sec sec-install" id="install" aria-labelledby="install-title">
+      <div class="wrap">
+        <div class="install-card" data-reveal>
+          <img class="install-icon" src="icons/icon-512.png" alt="" width="132" height="132" loading="lazy" />
+          <h2 id="install-title">Pack your dreams. <span class="ink-light">Start today.</span></h2>
+          <p class="sub">Install My Dream Bucket from this page — no app store, no sign-up. It opens full screen from your home screen, like any app.</p>
+          <button class="btn btn-light btn-lg" type="button" data-install>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-install-label>Install the app — free</span>
+          </button>
+          <p class="install-note" data-install-note aria-live="polite"></p>
+          <div class="how" id="how">
+            <div class="how-tabs" role="tablist" aria-label="How to install">
+              <button role="tab" type="button" data-p="android" id="tab-android" aria-controls="how-android" aria-selected="true">🤖 Android</button>
+              <button role="tab" type="button" data-p="ios" id="tab-ios" aria-controls="how-ios" aria-selected="false">🍎 iPhone &amp; iPad</button>
+              <button role="tab" type="button" data-p="desktop" id="tab-desktop" aria-controls="how-desktop" aria-selected="false">💻 Computer</button>
+            </div>
+            <ol class="how-steps" id="how-android" role="tabpanel" aria-labelledby="tab-android" data-p="android">
+              <li>Open this page in <b>Chrome</b> (or Edge, Samsung Internet).</li>
+              <li>Tap <b>Install the app</b> above — or the <b>⋮</b> menu, then <b>Install app</b>.</li>
+              <li>Find <b>Dream Bucket</b> on your home screen and open it.</li>
+            </ol>
+            <ol class="how-steps" id="how-ios" role="tabpanel" aria-labelledby="tab-ios" data-p="ios">
+              <li>Open this page in <b>Safari</b>.</li>
+              <li>Tap <b>Share</b> <svg class="ios-share" viewBox="0 0 24 24" aria-label="the Share button"><path d="M12 3v12M8 7l4-4 4 4M6 11v9h12v-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> at the bottom (or top) of the screen.</li>
+              <li>Choose <b>Add to Home Screen</b>, then <b>Add</b>.</li>
+            </ol>
+            <ol class="how-steps" id="how-desktop" role="tabpanel" aria-labelledby="tab-desktop" data-p="desktop">
+              <li>Open this page in <b>Chrome</b> or <b>Edge</b>.</li>
+              <li>Click <b>Install the app</b> above — or the <b>install icon</b> at the right end of the address bar.</li>
+              <li>On a Mac with Safari: <b>File → Add to Dock</b>.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 10 · FAQ ===== -->
+    <section class="sec sec-tint" id="faq" aria-labelledby="faq-title">
+      <div class="wrap wrap-narrow">
+        <header class="sec-head" data-reveal>
+          <p class="kicker">Questions</p>
+          <h2 id="faq-title">Good to know <span class="ink">before you go</span></h2>
+        </header>
+        <div class="faq">
+          <details data-reveal><summary>Is My Dream Bucket free?</summary><p>Yes. There is no account to make, nothing to sign up for and nothing to pay.</p></details>
+          <details data-reveal><summary>Where is my list kept?</summary><p>On your phone only. Your dreams, places, memories and photos never leave it — there is no server holding them and nothing is sent to us.</p></details>
+          <details data-reveal><summary>Does it work without the internet?</summary><p>Yes — once installed, the app opens and works offline. The Places map is the one part that needs the internet, to load the map pictures and the outlines of countries and states.</p></details>
+          <details data-reveal><summary>How do I move my list to a new phone?</summary><p>Menu → <b>Back up my list</b> saves a file with everything, photos included. On the new phone, install the app and choose <b>Restore from a backup</b>.</p></details>
+          <details data-reveal><summary>I keep my bucket list in MyNotes. Can I bring it?</summary><p>Yes. Menu → <b>Bring my list from MyNotes</b>. On the same phone and web address it is read straight from MyNotes; anywhere else, pick a MyNotes backup file. MyNotes itself is never changed.</p></details>
+          <details data-reveal><summary>Can my family have their own lists?</summary><p>Yes — one list per person, each with its own emoji and colour. The Bucket List Plan brings everyone’s dreams with a cost into one plan.</p></details>
+          <details data-reveal><summary>Is it on the Play Store or the App Store?</summary><p>You install it straight from this page — it works on Android phones, iPhones, iPads and computers, and opens full screen like any other app.</p></details>
+          <details data-reveal><summary>Which currencies can I use?</summary><p>Indian Rupee, US Dollar, UAE Dirham, Singapore Dollar, New Zealand Dollar and Sri Lankan Rupee — change it any time from the menu.</p></details>
+        </div>
+      </div>
+    </section>
   </main>
-  <nav class="bottom-nav" id="bucketBottomNav"></nav>
-  <div id="modalHost" class="modal-host hidden" aria-hidden="true"></div>
-  <noscript>My Dream Bucket needs JavaScript.</noscript>
-  <script type="module" src="js/main.js"></script>
+
+  <footer class="footer">
+    <div class="wrap foot">
+      <a class="brand" href="#top"><img src="icons/icon-192.png" alt="" width="44" height="44" loading="lazy" /><span class="brand-name">My Dream <b>Bucket</b></span></a>
+      <p class="foot-line">Dream it. Plan it. Live it.</p>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="#features">Features</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a><a href="#install">Install</a>
+      </nav>
+      <p class="foot-fine">Made for everyone with a place still to see. · Website designed by VGM Studios</p>
+    </div>
+  </footer>
+
+  <!-- Install help, when the browser has no install prompt to show (iPhone, Firefox...) -->
+  <dialog id="install-dialog" aria-labelledby="install-dialog-title">
+    <form method="dialog" class="dlg">
+      <img src="icons/icon-192.png" alt="" width="64" height="64" />
+      <h3 id="install-dialog-title">Install My Dream Bucket</h3>
+      <div id="install-dialog-body"></div>
+      <button class="btn btn-primary" value="ok">Got it</button>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="site/site.js" defer></script>
 </body>
 </html>

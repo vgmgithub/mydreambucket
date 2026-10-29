@@ -56,8 +56,8 @@ test('order: must-dos first, then the soonest year; done ones last, latest first
 
 test('the app: the list kept in meta as in MyNotes, the screens started by main.js, installable as My Dream Bucket', () => {
   assert.match(read('js/shell/bucket-ui.js'), /const KEY = 'bucketList';/);
-  assert.match(read('js/main.js'), /onMode\('bucket', \(\) => \{ drawHeader\(\); renderBucket\(\); \}\);/);
-  assert.match(read('js/main.js'), /onMode\('bucketplan', \(\) => \{ drawHeader\(\); renderBucketPlan\(\); \}\);/);
+  assert.match(read('js/main.js'), /onMode\('bucket', \(\) => \{ drawHeader\(\); enter\(\); return renderBucket\(\); \}\);/);
+  assert.match(read('js/main.js'), /onMode\('bucketplan', \(\) => \{ drawHeader\(\); enter\(\); return renderBucketPlan\(\); \}\);/);
   const m = JSON.parse(read('manifest.webmanifest'));
   assert.equal(m.name, 'My Dream Bucket');
   assert.ok(m.icons.some((i) => i.sizes === '512x512'));

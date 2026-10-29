@@ -1,18 +1,33 @@
 {
   "name": "My Dream Bucket",
   "short_name": "Dream Bucket",
-  "description": "Your bucket list, the places you have been and the memories - private, on your phone.",
-  "start_url": "./index.html",
+  "description": "Your bucket list, the places you have been and the memories - on a map, on a timeline, private on your phone.",
+  "id": "./",
+  "start_url": "./app.html?source=pwa",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0e1726",
-  "theme_color": "#7c3aed",
+  "lang": "en",
+  "dir": "ltr",
+  "background_color": "#f6f3ff",
+  "theme_color": "#f6f3ff",
   "categories": ["travel", "lifestyle"],
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
-    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Add a dream", "short_name": "Add", "url": "./app.html?action=add", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Places", "short_name": "Places", "url": "./app.html?view=places", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Bucket List Plan", "short_name": "Plan", "url": "./app.html?view=plan", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ],
+  "screenshots": [
+    { "src": "site/shot-list.webp", "sizes": "780x1688", "type": "image/webp", "form_factor": "narrow", "label": "My list - dreams with a year, a cost and stages" },
+    { "src": "site/shot-places.webp", "sizes": "780x1688", "type": "image/webp", "form_factor": "narrow", "label": "Places - the journey, year by year" },
+    { "src": "site/shot-milestones.webp", "sizes": "780x1688", "type": "image/webp", "form_factor": "narrow", "label": "Milestones - what came true" },
+    { "src": "site/shot-plan.webp", "sizes": "780x1688", "type": "image/webp", "form_factor": "narrow", "label": "Bucket List Plan - what to save, and when" },
+    { "src": "site/shot-map.webp", "sizes": "1600x950", "type": "image/webp", "form_factor": "wide", "label": "The Places map" }
   ]
 }

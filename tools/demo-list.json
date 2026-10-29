@@ -1,0 +1,65 @@
+{
+  "profiles": [
+    {
+      "id": "bp-demo-me", "name": "Me", "emoji": "😎", "color": "#8b5cf6", "manual": false,
+      "goals": { "countries": 12 },
+      "items": [
+        { "id": "bi-nl", "title": "See the Northern Lights", "cat": "travel", "by": 2027, "cost": 350000, "star": true, "saved": 120000, "place": "Tromsø, Norway", "since": "2019-01", "addedAt": "2019-01-04T09:00:00Z",
+          "steps": [{ "id": "s1", "title": "Renew the passport", "done": "2026-01" }, { "id": "s2", "title": "Apply for the Schengen visa", "done": null }, { "id": "s3", "title": "Book the flights", "done": null }, { "id": "s4", "title": "Book an aurora tour", "done": null }] },
+        { "id": "bi-ebc", "title": "Trek to Everest Base Camp", "cat": "adventure", "by": 2027, "cost": 150000, "star": true, "saved": 60000, "place": "Everest Base Camp, Nepal", "since": "2021-05", "addedAt": "2021-05-10T09:00:00Z",
+          "steps": [{ "id": "s1", "title": "Run 5K every Sunday", "done": "2026-04" }, { "id": "s2", "title": "A Himalayan practice trek", "done": "2026-09" }, { "id": "s3", "title": "Book a guide", "done": null }, { "id": "s4", "title": "Get the permits", "done": null }] },
+        { "id": "bi-kashi", "title": "Take the parents to Kashi", "cat": "family", "by": 2026, "cost": 60000, "star": true, "saved": 45000, "place": "Varanasi", "since": "2024-02", "addedAt": "2024-02-01T09:00:00Z" },
+        { "id": "bi-kyoto", "title": "Cherry blossoms in Kyoto", "cat": "travel", "by": 2028, "cost": 300000, "saved": 40000, "place": "Kyoto, Japan", "since": "2022-04", "addedAt": "2022-04-02T09:00:00Z",
+          "steps": [{ "id": "s1", "title": "Learn basic Japanese", "done": "2026-06" }, { "id": "s2", "title": "Plan the route", "done": null }, { "id": "s3", "title": "Book a ryokan", "done": null }] },
+        { "id": "bi-santorini", "title": "Sunset in Santorini", "cat": "travel", "by": 2028, "cost": 280000, "place": "Santorini, Greece", "since": "2023-08", "addedAt": "2023-08-12T09:00:00Z" },
+        { "id": "bi-surf", "title": "Learn to surf", "cat": "learn", "by": 2027, "cost": 25000, "place": "Varkala", "since": "2025-03", "addedAt": "2025-03-03T09:00:00Z" },
+        { "id": "bi-mara", "title": "Safari in the Masai Mara", "cat": "travel", "by": 2029, "cost": 450000, "place": "Masai Mara, Kenya", "since": "2024-11", "addedAt": "2024-11-20T09:00:00Z" },
+        { "id": "bi-balloon", "title": "Hot-air balloon over Cappadocia", "cat": "adventure", "by": 2030, "cost": 220000, "place": "Cappadocia, Turkey", "since": "2025-07", "addedAt": "2025-07-15T09:00:00Z" },
+
+        { "id": "bi-bali", "title": "Sunrise trek up Mount Batur", "cat": "adventure", "place": "Bali, Indonesia", "since": "2023-01", "addedAt": "2023-01-08T09:00:00Z", "done": "2026-05",
+          "memory": "Above the clouds by 6 am, banana pancakes cooked on volcanic steam.", "region": "Indonesia", "geo": ["island", "hill", "beach"], "adv": ["trek", "snorkel"], "stay": ["Villa"], "days": 7, "with": "her", "mode": "flight", "rating": 5 },
+        { "id": "bi-swiss", "title": "See the Swiss Alps by train", "cat": "travel", "place": "Interlaken, Switzerland", "since": "2018-06", "addedAt": "2018-06-01T09:00:00Z", "done": "2025-06",
+          "memory": "Paragliding over two lakes - the best ten minutes of my life.", "region": "Switzerland", "geo": ["snow", "lake", "hill"], "adv": ["paraglide"], "stay": ["Hotel"], "days": 8, "with": "her", "mode": "flight", "rating": 5 },
+        { "id": "bi-scuba", "title": "Go scuba diving", "cat": "adventure", "place": "Havelock, Andaman", "since": "2020-09", "addedAt": "2020-09-01T09:00:00Z", "done": "2025-02",
+          "memory": "A turtle swam right past me at 12 metres. I forgot to breathe.", "region": "Andaman & Nicobar", "geo": ["beach", "island"], "adv": ["scuba", "snorkel", "kayak"], "stay": ["Beach resort"], "days": 6, "with": "friends", "mode": "flight", "rating": 5 },
+        { "id": "bi-tiger", "title": "Sunrise at Tiger Hill", "cat": "travel", "place": "Darjeeling", "since": "2019-03", "addedAt": "2019-03-01T09:00:00Z", "done": "2024-11",
+          "memory": "Kanchenjunga turned gold while the tea was still hot.", "region": "West Bengal", "geo": ["hill", "snow"], "stay": ["Homestay"], "days": 5, "with": "family", "mode": "flight", "rating": 5 },
+        { "id": "bi-10k", "title": "Run a 10K", "cat": "fitness", "since": "2023-01", "addedAt": "2023-01-01T09:00:00Z", "done": "2024-03", "memory": "58 minutes - and I smiled the whole last kilometre." },
+        { "id": "bi-desert", "title": "Sleep under the stars in the desert", "cat": "experience", "place": "Jaisalmer", "since": "2021-02", "addedAt": "2021-02-01T09:00:00Z", "done": "2023-12",
+          "memory": "Camel ride at dusk, folk songs by the fire, a sky full of stars.", "region": "Rajasthan", "geo": ["desert", "heritage"], "adv": ["camel", "jeep"], "stay": ["Tent / Camp"], "days": 4, "with": "family", "mode": "train", "rating": 4 },
+        { "id": "bi-pangong", "title": "Ride to Pangong Lake", "cat": "adventure", "place": "Pangong, Ladakh", "since": "2017-05", "addedAt": "2017-05-01T09:00:00Z", "done": "2023-07",
+          "memory": "Seven shades of blue at 14,000 feet.", "region": "Ladakh", "geo": ["lake", "snow"], "adv": ["camp"], "stay": ["Tent / Camp"], "days": 9, "with": "friends", "mode": "bike", "rating": 5 },
+        { "id": "bi-boat", "title": "A night on a houseboat", "cat": "travel", "place": "Alleppey", "since": "2020-01", "addedAt": "2020-01-01T09:00:00Z", "done": "2022-12",
+          "memory": "Karimeen fry and a slow sunset over the backwaters.", "region": "Kerala", "geo": ["river"], "stay": ["Boat house"], "days": 3, "with": "family", "mode": "train", "rating": 4 }
+      ],
+      "visits": [
+        { "id": "bv-goa", "place": "Goa", "placeType": "state", "ym": "2021-12", "region": "Goa", "geo": ["beach"], "stay": ["Beach resort"], "days": 4, "with": "friends", "mode": "flight", "rating": 4, "adv": ["parasail", "jetski"], "memory": "New Year's Eve on the sand." },
+        { "id": "bv-munnar", "place": "Munnar", "placeType": "state", "ym": "2022-08", "region": "Kerala", "geo": ["hill", "waterfall"], "stay": ["Cottage"], "days": 3, "with": "family", "mode": "car", "rating": 5, "memory": "Tea gardens wrapped in mist." },
+        { "id": "bv-hampi", "place": "Hampi", "placeType": "state", "ym": "2023-01", "region": "Karnataka", "geo": ["heritage"], "stay": ["Homestay"], "days": 3, "with": "friends", "mode": "bus", "rating": 4, "adv": ["cycle"] },
+        { "id": "bv-dubai", "place": "Dubai", "placeType": "intl", "ym": "2024-04", "region": "UAE", "geo": ["city", "desert"], "stay": ["Hotel"], "days": 5, "with": "family", "mode": "flight", "rating": 4, "adv": ["jeep", "atv"] },
+        { "id": "bv-ooty", "place": "Ooty", "placeType": "tn", "ym": "2024-09", "region": "Tamil Nadu", "geo": ["hill", "lake"], "stay": ["Cottage"], "days": 2, "with": "family", "mode": "car", "rating": 4 },
+        { "id": "bv-pondy", "place": "Pondicherry", "placeType": "ut", "ym": "2025-01", "region": "Puducherry", "geo": ["beach", "heritage"], "stay": ["Homestay"], "days": 2, "with": "her", "mode": "car", "rating": 4 },
+        { "id": "bv-coorg", "place": "Coorg", "placeType": "state", "ym": "2025-10", "region": "Karnataka", "geo": ["hill", "forest", "waterfall"], "stay": ["Homestay"], "days": 3, "with": "friends", "mode": "car", "rating": 4, "adv": ["rafting"] },
+        { "id": "bv-sg", "place": "Singapore", "placeType": "intl", "ym": "2026-01", "region": "Singapore", "geo": ["city", "island"], "stay": ["Hotel"], "days": 5, "with": "family", "mode": "flight", "rating": 4 },
+        { "id": "bv-mahab", "place": "Mahabalipuram", "placeType": "tn", "ym": "2026-08", "region": "Tamil Nadu", "geo": ["beach", "heritage", "temple"], "stay": ["Day trip"], "days": 1, "with": "her", "mode": "car", "rating": 4 }
+      ],
+      "wishes": [
+        { "id": "bw-ice", "place": "Iceland", "placeType": "intl", "region": "Iceland", "by": 2030, "note": "Drive the Ring Road" },
+        { "id": "bw-megh", "place": "Meghalaya", "placeType": "state", "region": "Meghalaya", "by": 2027, "note": "Walk the living root bridges" },
+        { "id": "bw-spiti", "place": "Spiti Valley, Himachal", "placeType": "state", "region": "Himachal Pradesh", "by": 2027, "note": "A winter road trip" }
+      ],
+      "placeRank": []
+    },
+    {
+      "id": "bp-demo-amma", "name": "Amma", "emoji": "👵", "color": "#14b8a6", "manual": false,
+      "items": [
+        { "id": "ba-kedar", "title": "Pilgrimage to Kedarnath", "cat": "travel", "by": 2027, "cost": 80000, "star": true, "place": "Kedarnath", "since": "2020-01", "addedAt": "2020-01-01T09:00:00Z" },
+        { "id": "ba-taj", "title": "See the Taj Mahal by moonlight", "cat": "travel", "place": "Agra", "since": "2015-01", "addedAt": "2015-01-01T09:00:00Z", "done": "2024-10", "memory": "Finally - and it was even more beautiful than the photos.", "region": "Uttar Pradesh", "geo": ["heritage"], "days": 3, "with": "family", "mode": "train", "rating": 5 },
+        { "id": "ba-veena", "title": "Learn the veena", "cat": "creative", "by": 2027, "since": "2025-06", "addedAt": "2025-06-01T09:00:00Z" }
+      ],
+      "visits": [], "wishes": []
+    }
+  ],
+  "active": "bp-demo-me",
+  "plan": { "budget": 40000, "inflation": 6 }
+}

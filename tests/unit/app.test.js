@@ -43,5 +43,22 @@ test('MyNotes is only ever read: its database is opened only when it already exi
 
 test('every module loads (the ones that need no browser)', async () => {
   for (const f of ['js/core/db.js', 'js/core/core.js', 'js/core/backup.js', 'js/money/personal-ui.js', 'js/shell/bucket.js', 'js/shell/bucket-geo.js', 'js/shell/bucket-plan.js']) await import('../../' + f);
-  assert.ok(readFileSync(new URL('../../index.html', import.meta.url), 'utf8').includes('<script type="module" src="js/main.js"></script>'));
+  assert.ok(readFileSync(new URL('../../app.html', import.meta.url), 'utf8').includes('<script type="module" src="js/main.js"></script>'));
+});
+
+test('website in a browser tab, the app once installed (js/mode.js)', async () => {
+  await import('../../js/mode.js');
+  const { route } = globalThis.MDB;
+  const env = (host, standalone, search = '') => ({ location: { hostname: host, search, hash: '' }, navigator: {}, matchMedia: () => ({ matches: standalone }) });
+  assert.equal(route('site', env('example.com', true, '?view=places')), './app.html?view=places');
+  assert.equal(route('site', env('example.com', false)), null);
+  assert.equal(route('app', env('example.com', false)), './');
+  assert.equal(route('app', env('example.com', true)), null);
+  assert.equal(route('app', env('localhost', false)), null, 'the developer can open the app in a tab');
+  const site = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
+  assert.match(site, /MDB\.guard\('site'\)/);
+  assert.match(site, /data-install/);
+  const m = JSON.parse(readFileSync(new URL('../../manifest.webmanifest', import.meta.url), 'utf8'));
+  assert.equal(m.start_url, './app.html?source=pwa');
+  for (const i of m.icons.concat(m.screenshots)) assert.ok(existsSync(new URL('../../' + i.src, import.meta.url)), i.src + ' is missing');
 });
