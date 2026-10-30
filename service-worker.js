@@ -1,7 +1,7 @@
 // My Dream Bucket - works offline: the app's and the website's own files are kept on the phone, and the fonts from
 // Google Fonts once they have loaded; anything else from another site (the map library, map outlines and pictures) goes
 // to the network as usual. Bump CACHE with every release.
-const CACHE = 'mydreambucket-v2';
+const CACHE = 'mydreambucket-v3';
 const FONTS = 'mydreambucket-fonts-v1';
 const ASSETS = [
   './',

@@ -112,8 +112,10 @@ p { margin: 0; }
 .hero-visual { position: relative; height: clamp(440px, 118vw, 560px); width: 100%; max-width: 560px; margin: 0 auto; }
 .phone { position: relative; aspect-ratio: 390 / 844; padding: 9px; border-radius: 46px; background: linear-gradient(150deg, #3a2f6e, #120d2b 60%);
   box-shadow: 0 40px 80px -24px rgba(29, 22, 64, .55), 0 0 0 1.5px rgba(255, 255, 255, .25) inset, 0 0 0 1px rgba(29, 22, 64, .4); transform-style: preserve-3d; }
-.phone::before { content: ''; position: absolute; top: 18px; left: 50%; width: 30%; height: 22px; transform: translateX(-50%); background: #0b0820; border-radius: 99px; z-index: 2; }
-.phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 38px; }
+.phone::before { content: ''; position: absolute; top: 17px; left: 50%; width: 30%; height: 22px; transform: translateX(-50%); background: #0b0820; border-radius: 99px; z-index: 2; }
+/* A status-bar strip above the screen, so the notch never covers the app (the screenshots have no status bar). */
+.phone img { width: 100%; height: 100%; box-sizing: border-box; border-top: 36px solid #f6f3ff; background: #f6f3ff;
+  object-fit: cover; object-position: top; border-radius: 38px; }
 .hero-visual .phone { position: absolute; }
 .phone-front { width: clamp(210px, 52vw, 268px); left: 50%; top: 2%; transform: translateX(-62%) rotate(-3deg); z-index: 2; }
 .phone-back { width: clamp(180px, 44vw, 232px); left: 50%; top: 10%; transform: translateX(8%) rotate(7deg); z-index: 1; filter: saturate(.95); }
